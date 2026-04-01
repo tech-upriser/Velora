@@ -1,3 +1,4 @@
+import VeloraLogo from "../components/VeloraLogo";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -152,8 +153,7 @@ export default function ResetPassword() {
 
       <div className="rp-wrap">
         <div className="rp-logo" onClick={() => navigate("/")}>
-          <div className="rp-logo-icon">✈️</div>
-          <span className="rp-logo-text">Velora</span>
+          <VeloraLogo size={30} textColor="#fff" />
         </div>
 
         <div className="rp-card">

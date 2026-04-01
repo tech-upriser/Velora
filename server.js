@@ -28,6 +28,7 @@ const analyticsRoutes    = require("./routes/analyticRoutes");
 const reviewRoutes       = require("./routes/reviewRoutes");
 const notificationRoutes = require("./routes/notificationRoutes");
 const alertRoutes        = require("./routes/alertRoutes");
+const sosRoutes          = require("./routes/sosRoutes");
 
 // Mount routes
 app.use("/api", authRoutes);
@@ -38,6 +39,7 @@ app.use("/api", analyticsRoutes);
 app.use("/api", reviewRoutes);
 app.use("/api", notificationRoutes);
 app.use("/api", alertRoutes);
+app.use("/api", sosRoutes);
 
 // Root route
 app.get("/", (req, res) => {

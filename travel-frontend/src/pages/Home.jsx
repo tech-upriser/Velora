@@ -862,6 +862,108 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Experiences ── */}
+      <section id="experiences" style={{
+        padding: "80px 5%",
+        background: "#111",
+        textAlign: "center"
+      }}>
+        <p className="section-eyebrow">✦ What We Offer</p>
+        <h2 className="section-title">Travel Experiences</h2>
+        <p className="section-desc">Everything you need for a seamless journey — all in one place.</p>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+          gap: "24px",
+          maxWidth: "1100px",
+          margin: "48px auto 0"
+        }}>
+          {[
+            { icon: "🗺️", title: "Route Optimization", desc: "Plan the shortest path across multiple tourist spots using our smart TSP algorithm — save time, see more." },
+            { icon: "📍", title: "Place Discovery", desc: "Explore top-rated attractions, restaurants, and hidden gems in any city across India, powered by Google Places." },
+            { icon: "🚨", title: "SOS Emergency", desc: "One-tap emergency alerts with your live location. Nearby hospitals, police and fire stations always at hand." },
+            { icon: "📊", title: "Travel Analytics", desc: "Track your trips, cities explored and distance covered. Unlock milestones as you roam further." },
+          ].map(({ icon, title, desc }) => (
+            <div key={title} style={{
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: "16px",
+              padding: "32px 24px",
+              textAlign: "left",
+              transition: "transform 0.2s, border-color 0.2s",
+              cursor: "default"
+            }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.borderColor = "rgba(245,166,35,0.4)"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)";  e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}
+            >
+              <div style={{ fontSize: "32px", marginBottom: "16px" }}>{icon}</div>
+              <h3 style={{ fontSize: "17px", fontWeight: 700, color: "#fff", marginBottom: "10px" }}>{title}</h3>
+              <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.6)", lineHeight: 1.65 }}>{desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── About ── */}
+      <section id="about" style={{
+        padding: "80px 5%",
+        background: "#0A0A0A",
+        display: "flex",
+        flexWrap: "wrap",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "60px"
+      }}>
+        <div style={{ maxWidth: "480px" }}>
+          <p className="section-eyebrow">✦ Our Story</p>
+          <h2 className="section-title" style={{ textAlign: "left" }}>About Velora</h2>
+          <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.65)", lineHeight: 1.8, marginTop: "16px" }}>
+            Velora was built by a team of five students who were tired of juggling five different apps
+            just to plan a single trip. We set out to create one smart, beautiful companion that handles
+            discovery, routing, safety and tracking — so you can focus on the journey, not the logistics.
+          </p>
+          <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.65)", lineHeight: 1.8, marginTop: "14px" }}>
+            Powered by Google Maps APIs, OpenWeatherMap and a custom TSP route optimizer, Velora
+            brings together the best tools for modern travellers across India.
+          </p>
+          <div style={{ display: "flex", gap: "32px", marginTop: "36px", flexWrap: "wrap" }}>
+            {[["5", "Team Members"], ["4", "APIs Integrated"], ["6", "Travel Milestones"]].map(([num, label]) => (
+              <div key={label}>
+                <div style={{ fontSize: "32px", fontWeight: 800, color: "#F5A623" }}>{num}</div>
+                <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", marginTop: "4px" }}>{label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div style={{
+          background: "rgba(255,255,255,0.04)",
+          border: "1px solid rgba(255,255,255,0.08)",
+          borderRadius: "20px",
+          padding: "32px",
+          maxWidth: "340px",
+          width: "100%"
+        }}>
+          <p style={{ fontSize: "13px", fontWeight: 600, color: "#F5A623", letterSpacing: "1px", textTransform: "uppercase", marginBottom: "20px" }}>Our Team</p>
+          {["Shreya Kumari", "E.V. Sai Chathurya", "Gunuganti Sanjitha", "A. Sai Poojitha", "P. Sindhu Priya"].map(name => (
+            <div key={name} style={{
+              display: "flex", alignItems: "center", gap: "12px",
+              padding: "10px 0",
+              borderBottom: "1px solid rgba(255,255,255,0.06)"
+            }}>
+              <div style={{
+                width: "34px", height: "34px", borderRadius: "50%",
+                background: "linear-gradient(135deg, #E8341A, #F5A623)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: "13px", fontWeight: 700, color: "#fff", flexShrink: 0
+              }}>
+                {name[0]}
+              </div>
+              <span style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)" }}>{name}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ── Cookie Banner ── */}
       {!cookieDismissed && (
         <div className="cookie-banner">

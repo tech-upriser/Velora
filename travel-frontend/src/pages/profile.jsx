@@ -1,3 +1,4 @@
+import VeloraLogo from "../components/VeloraLogo";
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
@@ -797,8 +798,7 @@ export default function Profile() {
       {/* ── Navbar ── */}
       <nav className="velora-nav">
         <a className="nav-logo" href="/" onClick={e => { e.preventDefault(); navigate("/"); }}>
-          <div className="nav-logo-icon">✈</div>
-          <span className="nav-logo-text">Velora</span>
+          <VeloraLogo size={30} textColor="#fff" />
         </a>
         <button className="nav-back" onClick={() => navigate("/")}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">

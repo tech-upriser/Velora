@@ -1,3 +1,4 @@
+import VeloraLogo from "../components/VeloraLogo";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, googleProvider, githubProvider } from "../firebase";
@@ -501,8 +502,7 @@ export default function Login() {
           <div className="vl-bg-overlay" />
           <div className="vl-left-content">
             <div className="vl-left-logo">
-              <div className="vl-left-logo-icon">✈️</div>
-              <span className="vl-left-logo-name">Velora</span>
+              <VeloraLogo size={30} textColor="#fff" />
             </div>
             <h2 className="vl-left-headline">
               Redefining the<br />way you <span>roam</span>
@@ -532,8 +532,7 @@ export default function Login() {
 
           {/* Mobile logo */}
           <div className="vl-mobile-logo">
-            <div className="vl-mobile-logo-icon">✈️</div>
-            <span className="vl-mobile-logo-name">Velora</span>
+            <VeloraLogo size={28} textColor="#1a1a1a" />
           </div>
 
           {!isForgot ? (

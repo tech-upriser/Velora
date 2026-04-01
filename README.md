@@ -159,10 +159,13 @@ Velora-main/
 ├── utils/
 │   └── tsp.js                 # TSP algorithm utility
 │
+├── setup.js                   # ✨ Interactive setup — creates your .env files
+├── .env.example               # Reference for all backend env variables
 ├── server.js                  # Entry point
 ├── package.json
 │
 └── travel-frontend/           # React + Vite frontend
+    ├── .env.example           # Reference for frontend env variables
     └── src/
         ├── pages/
         │   ├── Home.jsx
@@ -184,10 +187,10 @@ Velora-main/
 
 ### Prerequisites
 - Node.js v18+
-- MongoDB (local or Atlas)
+- MongoDB (local or [Atlas free tier](https://cloud.mongodb.com))
 - Google Cloud project with Places API, Distance Matrix API, and Directions API enabled
-- OpenWeatherMap API key
-- Gmail account for Nodemailer (with App Password enabled)
+- OpenWeatherMap API key (free tier)
+- Gmail account with an App Password set up for Nodemailer
 - Firebase project for Google/GitHub OAuth
 
 ### 1. Clone the repository
@@ -196,34 +199,65 @@ git clone https://github.com/your-username/velora.git
 cd velora
 ```
 
-### 2. Set up the backend
+### 2. Install dependencies
+
 ```bash
+# Backend
 npm install
+
+# Frontend
+cd travel-frontend && npm install && cd ..
 ```
 
-Create a `.env` file in the root (see [Environment Variables](#environment-variables) below), then:
+### 3. Configure environment variables
+
+> **Recommended — Interactive setup script**
+>
+> Run the setup wizard from the project root. It will ask you for each value one at a time, explain where to get it, and automatically write both `.env` files for you:
+>
+> ```bash
+> node setup.js
+> ```
+>
+> The script creates:
+> - `.env` — backend secrets (MongoDB, Google API, email, JWT, etc.)
+> - `travel-frontend/.env` — frontend API URL
+>
+> You can re-run `node setup.js` at any time to update your config.
+
+If you prefer to configure manually, see the [Environment Variables](#environment-variables) section below.
+
+### 4. Start the project
+
+Open two terminals:
+
 ```bash
+# Terminal 1 — Backend (from project root)
 node server.js
 # or with auto-reload:
 npx nodemon server.js
 ```
 
-The backend runs on `http://localhost:5000`.
-
-### 3. Set up the frontend
 ```bash
+# Terminal 2 — Frontend
 cd travel-frontend
-npm install
 npm run dev
 ```
 
-The frontend runs on `http://localhost:5173`.
+| Service | URL |
+|---------|-----|
+| Backend API | http://localhost:5000 |
+| Frontend | http://localhost:5173 |
 
 ---
 
 ## Environment Variables
 
-Create a `.env` file in the project root with the following keys:
+The easiest way to set these up is by running `node setup.js` from the project root — it will guide you through each value interactively.
+
+If you'd rather configure manually, create a `.env` file in the project root and a `travel-frontend/.env` file using the templates below. Reference files are also available as `.env.example` and `travel-frontend/.env.example`.
+
+### Backend `.env`
 
 ```env
 # Server
@@ -231,23 +265,46 @@ PORT=5000
 FRONTEND_URL=http://localhost:5173
 
 # MongoDB
+# Get a free cluster at: https://cloud.mongodb.com
 MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/velora
 
-# JWT
+# JWT — any long random string
 JWT_SECRET=your_super_secret_jwt_key
 
-# Google APIs
+# Google Cloud API Key
+# Enable: Places API, Distance Matrix API, Directions API
+# Console: https://console.cloud.google.com → APIs & Services → Credentials
 GOOGLE_API_KEY=your_google_cloud_api_key
 
-# OpenWeatherMap
+# OpenWeatherMap — free signup at https://openweathermap.org/api
 OPENWEATHER_API_KEY=your_openweathermap_api_key
 
-# Email (Gmail)
+# Gmail (Nodemailer)
+# IMPORTANT: Use an App Password, NOT your real Gmail password
+# Setup: myaccount.google.com → Security → 2-Step Verification → App Passwords
 EMAIL_USER=your.email@gmail.com
 EMAIL_PASS=your_gmail_app_password
 ```
 
-> **Gmail setup:** Go to Google Account → Security → 2-Step Verification → App Passwords. Generate a password for "Mail" and use it as `EMAIL_PASS`. Do not use your regular Gmail password.
+### Frontend `travel-frontend/.env`
+
+```env
+# URL of your running backend
+VITE_API_URL=http://localhost:5000
+```
+
+### Where to get each key
+
+| Variable | Where to get it |
+|----------|----------------|
+| `MONGO_URI` | [cloud.mongodb.com](https://cloud.mongodb.com) → New Project → Free cluster → Connect |
+| `JWT_SECRET` | Any random string — `node setup.js` generates one automatically |
+| `GOOGLE_API_KEY` | [console.cloud.google.com](https://console.cloud.google.com) → APIs & Services → Credentials → Create API key |
+| `OPENWEATHER_API_KEY` | [openweathermap.org/api](https://openweathermap.org/api) → Sign up → My API Keys |
+| `EMAIL_USER` | Your Gmail address |
+| `EMAIL_PASS` | Google Account → Security → App Passwords → Generate for "Mail" |
+
+> **Note on Firebase:** Firebase config is currently hardcoded in `travel-frontend/src/firebase.js`. If you fork this project and deploy it, replace those values with your own Firebase project credentials from the [Firebase Console](https://console.firebase.google.com).
 
 ---
 

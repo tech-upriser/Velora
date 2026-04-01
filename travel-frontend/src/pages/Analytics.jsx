@@ -1,3 +1,4 @@
+import VeloraLogo from "../components/VeloraLogo";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
@@ -255,8 +256,7 @@ export default function Analytics() {
       {/* NAV */}
       <nav className="an-nav">
         <div className="an-nav-logo" onClick={() => navigate("/")}>
-          <div className="an-nav-logo-icon">✈️</div>
-          <span className="an-nav-logo-text">Velora</span>
+          <VeloraLogo size={30} textColor="#fff" />
         </div>
         <div className="an-nav-links">
           <span className="an-nav-link" onClick={() => navigate("/")}>Home</span>

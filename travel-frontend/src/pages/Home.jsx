@@ -1,3 +1,4 @@
+import VeloraLogo from "../components/VeloraLogo";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
@@ -745,8 +746,7 @@ export default function Home() {
       {/* ── Navbar ── */}
       <nav className={`velora-nav${scrolled ? " scrolled" : ""}`}>
         <a className="nav-logo" href="/" onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
-          <div className="nav-logo-icon">✈</div>
-          <span className="nav-logo-text">Velora</span>
+          <VeloraLogo size={32} textColor="#fff" />
         </a>
 
         <div className="nav-links">

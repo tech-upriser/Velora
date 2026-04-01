@@ -1,3 +1,4 @@
+import VeloraLogo from "../components/VeloraLogo";
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
@@ -45,8 +46,8 @@ export default function Emergency() {
 
   // ── Auth listener ──────────────────────────────────────────────────────────
   useEffect(() => {
-    const name  = localStorage.getItem("velora_name");
-    const token = localStorage.getItem("token");
+    const name  = localStorage.getItem("velora_user") ? (JSON.parse(localStorage.getItem("velora_user")).name || JSON.parse(localStorage.getItem("velora_user")).email) : null;
+    const token = localStorage.getItem("velora_token");
     if (name || token) setUser({ name: name || "Traveler" });
 
     const unsub = auth.onAuthStateChanged(u => {
@@ -75,7 +76,7 @@ export default function Emergency() {
   // ── Fetch nearby emergency services ───────────────────────────────────────
   useEffect(() => {
     if (locStatus !== "granted" || !coords) return;
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("velora_token");
     if (!token) return;
 
     setFetchingServices(true);
@@ -107,7 +108,7 @@ export default function Emergency() {
 
   const triggerSos = async () => {
     setSosState("sent");
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("velora_token");
     try {
       await fetch(`${BASE_URL}/sos/alert`, {
         method:  "POST",
@@ -128,8 +129,8 @@ export default function Emergency() {
   // ── Sign out ───────────────────────────────────────────────────────────────
   const handleSignOut = async () => {
     try { await signOut(auth); } catch { /* ignore */ }
-    localStorage.removeItem("token");
-    localStorage.removeItem("velora_name");
+    localStorage.removeItem("velora_token");
+    localStorage.removeItem("velora_user");
     navigate("/login");
   };
 
@@ -422,8 +423,7 @@ export default function Emergency() {
       {/* NAV */}
       <nav className="e-nav">
         <div className="e-nav-logo" onClick={() => navigate("/")}>
-          <div className="e-nav-logo-icon">✈️</div>
-          <span className="e-nav-logo-text">Velora</span>
+          <VeloraLogo size={30} textColor="#fff" />
         </div>
         <div className="e-nav-links">
           <span className="e-nav-link" onClick={() => navigate("/")}>Home</span>
